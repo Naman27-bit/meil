@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
+.env
+.env.*
+
+# Streamlit / LangChain / Chroma persistent storage (if created inside frontend)
+**/chroma_db/
+**/chrome_langchain_db/
+**/*.sqlite3
+
+# Misc
+.DS_Store
+*.log
+
