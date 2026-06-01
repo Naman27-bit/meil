@@ -93,3 +93,6 @@ Open the URL shown in the terminal and ask questions like:
 - **Model not found**: If Ollama can’t find `llama3.2` or `mxbai-embed-large`, pull them in Ollama.
 
 # tanushree
+# AI-RESTAURANT-CHATBOT
+# AI-RESTAURANT-CHATBOT
+# AI-RESTAURANT-CHATBOT
