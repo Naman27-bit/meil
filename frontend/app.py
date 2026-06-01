@@ -100,15 +100,14 @@ with st.sidebar:
         st.rerun()
 
     st.markdown("---")
-
-    MODEL_OPTIONS = {
+    st.markdown("### 🤖 Model Used")
+    MODELS= {
         "llama-3.1-8b-instant (Fast ✅)":    "llama-3.1-8b-instant",
-        "llama-3.3-70b (Smart ✅)":  "llama-33-70b-versatile",
-        "Mixtral 8x7B (Best ✅)":  "mixtral-8x7b-32768",
+        "llama-3.1-8b (Accurate 🐢)":       "llama-3.1-8b",
     }
 
-    selected_label = st.selectbox("🤖 Select Model", list(MODEL_OPTIONS.keys()), index=0)
-    selected_model = MODEL_OPTIONS[selected_label]
+    selected_label = st.selectbox("🤖 Select Model", list(MODELS.keys()), index=0)
+    selected_model = MODELS[selected_label]
     st.caption(f"Model ID: `{selected_model}`")
 
     st.markdown("---")
