@@ -106,7 +106,7 @@ with st.sidebar:
 
     }
 
-    selected_label = st.selectbox("🤖 Select Model", list(MODEL.keys()), index=0)
+    selected_label = st.selectbox("🤖 Selected Model", list(MODEL.keys()), index=0)
     selected_model = MODEL[selected_label]
     st.caption(f"Model ID: `{selected_model}`")
 
