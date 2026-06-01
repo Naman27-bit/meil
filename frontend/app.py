@@ -101,13 +101,13 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("### 🤖 Model Used")
-    MODELS= {
-        "llama-3.1-8b-instant (Fast ✅)":    "llama-3.1-8b-instant",
-        "llama-3.1-8b (Accurate 🐢)":       "llama-3.1-8b",
+    MODEL= {
+        "llama-3.1-8b-instant (Fast ✅)":    "llama-3.1-8b-instant"
+
     }
 
-    selected_label = st.selectbox("🤖 Select Model", list(MODELS.keys()), index=0)
-    selected_model = MODELS[selected_label]
+    selected_label = st.selectbox("🤖 Select Model", list(MODEL.keys()), index=0)
+    selected_model = MODEL[selected_label]
     st.caption(f"Model ID: `{selected_model}`")
 
     st.markdown("---")
