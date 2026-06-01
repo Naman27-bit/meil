@@ -95,7 +95,7 @@ with st.sidebar:
     st.markdown("*Your AI-powered restaurant assistant*")
     st.markdown("---")
 
-    if st.button("🗑️ Clear Chat"):
+    if st.button(" Clear Chat"):
         st.session_state.messages = []
         st.rerun()
 
