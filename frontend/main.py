@@ -30,7 +30,7 @@ def get_answer(user_question: str, model_name: str = "llama-3.1-8b-instant") -> 
     try:
         api_key = os.environ.get("GROQ_API_KEY")
         if not api_key:
-            return "❌ Groq Api."
+            return " Wrong Groq Api."
         client = Groq(api_key=api_key)
         response = client.chat.completions.create(
             model=model_name,
