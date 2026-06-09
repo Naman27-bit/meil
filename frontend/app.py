@@ -103,7 +103,7 @@ st.markdown("""
         font-weight: 700 !important;
     }
 
-    /* Chat messages */
+    /* Chat messages - force light bg + dark text */
     [data-testid="stChatMessage"] {
         background: #ffffff !important;
         border: 1px solid #e8e8f0 !important;
@@ -112,9 +112,25 @@ st.markdown("""
         padding: 10px 16px !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
     }
-    [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
-        background: linear-gradient(135deg, #fff4e6, #fef0f5) !important;
-        border-color: #f0c080 !important;
+    [data-testid="stChatMessage"] p,
+    [data-testid="stChatMessage"] span,
+    [data-testid="stChatMessage"] div,
+    [data-testid="stChatMessageContent"],
+    [data-testid="stChatMessageContent"] * {
+        color: #1a1a2e !important;
+        font-family: "Nunito", sans-serif !important;
+        font-size: 15px !important;
+    }
+
+    /* Main area text - force dark */
+    .stApp p, .stApp span, .stApp div,
+    .stMarkdown p, .stMarkdown span {
+        color: #1a1a2e !important;
+    }
+
+    /* Caption text */
+    .stApp .stCaption, .stApp small {
+        color: #555577 !important;
     }
 
     /* Chat input */
