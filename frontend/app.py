@@ -131,9 +131,42 @@ st.markdown("""
         font-family: 'Nunito', sans-serif !important;
     }
 
-    /* Selectbox */
-    [data-testid="stSelectbox"] * {
-        color: #f0f0f0 !important;
+    /* Selectbox - white bg, dark text */
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] > div > div {
+        background: #ffffff !important;
+        border: 1.5px solid #e05a00 !important;
+        border-radius: 8px !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] span,
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] p {
+        color: #1a1a2e !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] label {
+        color: #f0c080 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Text input API Key - white bg dark text */
+    [data-testid="stSidebar"] [data-testid="stTextInput"] input {
+        background: #ffffff !important;
+        color: #1a1a2e !important;
+        border: 1.5px solid #e05a00 !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stTextInput"] label {
+        color: #f0c080 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Caption / Model ID */
+    [data-testid="stSidebar"] .stCaption,
+    [data-testid="stSidebar"] small {
+        color: #aac4ff !important;
+        font-size: 12px !important;
     }
 
     footer { visibility: hidden; }
