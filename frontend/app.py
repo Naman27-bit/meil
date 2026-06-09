@@ -18,62 +18,62 @@ st.set_page_config(
     layout="wide"
 )
 
-font_import = (
-    "@import url('https://fonts.googleapis.com/css2?"
-    "family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap');"
-)
+st.markdown("""
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
 
-st.markdown(f"""
+st.markdown("""
 <style>
-    {font_import}
-    html, body, [class*="css"] {{
-        font-family: 'DM Sans', sans-serif;
+    html, body, [class*="css"], p, span, div, label, input, textarea, button {
+        font-family: 'DM Sans', sans-serif !important;
         color: #1a1a2e;
-    }}
-    .stApp {{
+    }
+    .stApp {
         background: linear-gradient(
             135deg,
             #fef9f0 0%,
             #fff4e6 50%,
             #fef0f5 100%
         );
-    }}
-    [data-testid="stSidebar"] {{
+    }
+    [data-testid="stSidebar"] {
         background: linear-gradient(
             180deg,
             #f0f4ff 0%,
             #e8f0fe 100%
         );
         border-right: 2px solid #c7d7f5;
-    }}
-    [data-testid="stSidebar"] * {{
+    }
+    [data-testid="stSidebar"] * {
         color: #1a1a2e !important;
-    }}
-    h1 {{
+    }
+    h1 {
         font-family: 'Playfair Display', serif !important;
         color: #e05a00 !important;
-    }}
-    h2, h3, h4 {{
+    }
+    h2, h3, h4 {
         color: #2c3e7a !important;
-    }}
-    [data-testid="stChatMessage"] {{
+    }
+    [data-testid="stChatMessage"] {
         background: #ffffff;
         border: 1px solid #dde8ff;
         border-radius: 14px;
         margin: 6px 0;
         padding: 4px 8px;
-    }}
-    [data-testid="stChatInput"] {{
+    }
+    [data-testid="stChatInput"] {
         background: #ffffff !important;
         border: 2px solid #4a90d9 !important;
         border-radius: 12px !important;
-    }}
-    [data-testid="stChatInput"] textarea {{
+    }
+    [data-testid="stChatInput"] textarea {
         background: #ffffff !important;
         color: #1a1a2e !important;
         font-size: 15px !important;
-    }}
-    .stButton button {{
+    }
+    .stButton button {
         background: linear-gradient(
             135deg,
             #4a90d9,
@@ -82,10 +82,10 @@ st.markdown(f"""
         color: white;
         border: none;
         border-radius: 8px;
-    }}
-    footer {{
+    }
+    footer {
         visibility: hidden;
-    }}
+    }
 </style>
 """, unsafe_allow_html=True)
 
