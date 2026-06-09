@@ -1,8 +1,19 @@
+import sys
+import io
+import os
+import traceback
+
+# Fix Unicode/emoji encoding on Windows & Streamlit Cloud
+if hasattr(sys.stdout, 'buffer'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'buffer'):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
+os.environ["PYTHONIOENCODING"] = "utf-8"
+
 from groq import Groq
 from langchain_groq import ChatGroq
 from pydantic import SecretStr
-import os
-import traceback
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -12,7 +23,7 @@ SYSTEM_PROMPT = (
     "a cozy, food-loving restaurant.\n"
     "Answer questions about menu, hours, reservations, and "
     "recommendations.\n"
-    "Be enthusiastic about food, use food emojis occasionally 🍕🍜🍣, "
+    "Be enthusiastic about food, use food emojis occasionally, "
     "and keep responses concise but warm."
 )
 
@@ -30,7 +41,7 @@ def get_answer(user_question: str, model_name: str = "llama-3.1-8b-instant") -> 
     try:
         api_key = os.environ.get("GROQ_API_KEY")
         if not api_key:
-            return " Wrong Groq Api."
+            return "Wrong Groq API key. Please set it in the sidebar."
         client = Groq(api_key=api_key)
         response = client.chat.completions.create(
             model=model_name,
@@ -41,10 +52,12 @@ def get_answer(user_question: str, model_name: str = "llama-3.1-8b-instant") -> 
             temperature=0.7,
             max_tokens=512,
         )
-        return response.choices[0].message.content.strip()
+        answer = response.choices[0].message.content.strip()
+        # Ensure safe encoding before returning
+        return answer.encode('utf-8', errors='replace').decode('utf-8')
     except Exception as e:
         return (
-            f"❌ Error: {type(e).__name__}: {str(e)}\n\n"
+            f"Error: {type(e).__name__}: {str(e)}\n\n"
             f"{traceback.format_exc()}"
         )
 
@@ -52,4 +65,5 @@ def get_answer(user_question: str, model_name: str = "llama-3.1-8b-instant") -> 
 if __name__ == "__main__":
     test_q = "What are your most popular dishes?"
     print("Q:", test_q)
-    print("A:", get_answer(test_q))
+    answer = get_answer(test_q)
+    print("A:", answer.encode('utf-8', errors='replace').decode('utf-8'))
