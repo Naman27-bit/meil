@@ -22,15 +22,36 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;500;600;700&display=swap');
 
-    /* Hide broken material icons text */
+    /* Hide broken material icons text in chat avatars */
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"],
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
         display: none !important;
     }
 
-    /* Fix keyboard_double arrow icon in input */
-    [data-testid="stChatInputSubmitButton"] svg {
-        display: block !important;
+    /* Hide keyboard_double_arrow text in sidebar toggle button */
+    [data-testid="stSidebarCollapseButton"] span,
+    [data-testid="collapsedControl"] span,
+    [data-testid="stSidebarCollapseButton"] .material-symbols-rounded,
+    [data-testid="collapsedControl"] .material-symbols-rounded,
+    button[data-testid="stSidebarCollapseButton"] > span {
+        font-size: 0 !important;
+        visibility: hidden !important;
+        width: 0 !important;
+    }
+
+    /* Style sidebar toggle button as clean circle */
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="collapsedControl"] {
+        background: #e05a00 !important;
+        border-radius: 50% !important;
+        border: none !important;
+        width: 34px !important;
+        height: 34px !important;
+    }
+    [data-testid="stSidebarCollapseButton"] svg,
+    [data-testid="collapsedControl"] svg {
+        fill: white !important;
+        color: white !important;
     }
 
     html, body, [class*="css"],
