@@ -19,43 +19,45 @@ st.set_page_config(
 )
 
 st.markdown("""
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-""", unsafe_allow_html=True)
-
-st.markdown("""
 <style>
-    html, body, [class*="css"], p, span, div, label, input, textarea, button {
-        font-family: 'DM Sans', sans-serif !important;
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;500;600;700&display=swap');
+
+    html, body, [class*="css"],
+    p, span, div, label, input, textarea, button,
+    .stMarkdown, .stText, .stCaption,
+    [data-testid="stChatMessageContent"],
+    [data-testid="stChatMessageContent"] * {
+        font-family: 'Nunito', sans-serif !important;
         color: #1a1a2e;
     }
+
     .stApp {
-        background: linear-gradient(
-            135deg,
-            #fef9f0 0%,
-            #fff4e6 50%,
-            #fef0f5 100%
-        );
+        background: linear-gradient(135deg, #fef9f0 0%, #fff4e6 50%, #fef0f5 100%);
     }
+
     [data-testid="stSidebar"] {
-        background: linear-gradient(
-            180deg,
-            #f0f4ff 0%,
-            #e8f0fe 100%
-        );
+        background: linear-gradient(180deg, #f0f4ff 0%, #e8f0fe 100%);
         border-right: 2px solid #c7d7f5;
     }
+
     [data-testid="stSidebar"] * {
         color: #1a1a2e !important;
+        font-family: 'Nunito', sans-serif !important;
     }
-    h1 {
+
+    h1, .stTitle, [data-testid="stHeadingWithActionElements"] h1 {
         font-family: 'Playfair Display', serif !important;
         color: #e05a00 !important;
+        font-size: 2.4rem !important;
+        font-weight: 700 !important;
     }
+
     h2, h3, h4 {
+        font-family: 'Nunito', sans-serif !important;
         color: #2c3e7a !important;
+        font-weight: 700 !important;
     }
+
     [data-testid="stChatMessage"] {
         background: #ffffff;
         border: 1px solid #dde8ff;
@@ -63,29 +65,30 @@ st.markdown("""
         margin: 6px 0;
         padding: 4px 8px;
     }
+
     [data-testid="stChatInput"] {
         background: #ffffff !important;
         border: 2px solid #4a90d9 !important;
         border-radius: 12px !important;
     }
+
     [data-testid="stChatInput"] textarea {
         background: #ffffff !important;
         color: #1a1a2e !important;
         font-size: 15px !important;
+        font-family: 'Nunito', sans-serif !important;
     }
+
     .stButton button {
-        background: linear-gradient(
-            135deg,
-            #4a90d9,
-            #2c6fba
-        );
-        color: white;
+        background: linear-gradient(135deg, #4a90d9, #2c6fba);
+        color: white !important;
         border: none;
         border-radius: 8px;
+        font-family: 'Nunito', sans-serif !important;
+        font-weight: 600 !important;
     }
-    footer {
-        visibility: hidden;
-    }
+
+    footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -95,15 +98,14 @@ with st.sidebar:
     st.markdown("*Your AI-powered restaurant assistant*")
     st.markdown("---")
 
-    if st.button(" Clear Chat"):
+    if st.button("🗑️ Clear Chat"):
         st.session_state.messages = []
         st.rerun()
 
     st.markdown("---")
     st.markdown("### 🤖 Model Used")
-    MODEL= {
-        "llama-3.1-8b-instant (Fast ✅)":    "llama-3.1-8b-instant"
-
+    MODEL = {
+        "llama-3.1-8b-instant (Fast ✅)": "llama-3.1-8b-instant"
     }
 
     selected_label = st.selectbox("🤖 Selected Model", list(MODEL.keys()), index=0)
@@ -138,7 +140,7 @@ st.markdown("---")
 st.markdown(
     "👋 Hi! I'm **TanuShree**, your AI Restaurant Assistant. "
     "Ask me about our **menu**, **specials**, **hours**, or anything else! 🍜🍣"
-    )
+)
 st.markdown("---")
 
 if "messages" not in st.session_state:
