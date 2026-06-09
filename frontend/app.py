@@ -28,30 +28,37 @@ st.markdown("""
         display: none !important;
     }
 
-    /* Hide keyboard_double_arrow text in sidebar toggle button */
+    /* Hide keyboard_double_arrow text completely */
     [data-testid="stSidebarCollapseButton"] span,
     [data-testid="collapsedControl"] span,
     [data-testid="stSidebarCollapseButton"] .material-symbols-rounded,
-    [data-testid="collapsedControl"] .material-symbols-rounded,
-    button[data-testid="stSidebarCollapseButton"] > span {
-        font-size: 0 !important;
-        visibility: hidden !important;
-        width: 0 !important;
+    [data-testid="collapsedControl"] .material-symbols-rounded {
+        display: none !important;
     }
 
-    /* Style sidebar toggle button as clean circle */
+    /* Replace with hamburger menu icon */
     [data-testid="stSidebarCollapseButton"],
     [data-testid="collapsedControl"] {
         background: #e05a00 !important;
-        border-radius: 50% !important;
+        border-radius: 8px !important;
         border: none !important;
-        width: 34px !important;
-        height: 34px !important;
+        width: 36px !important;
+        height: 36px !important;
+        position: relative !important;
+    }
+    [data-testid="stSidebarCollapseButton"]::after,
+    [data-testid="collapsedControl"]::after {
+        content: "³0" !important;
+        color: white !important;
+        font-size: 18px !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
     [data-testid="stSidebarCollapseButton"] svg,
     [data-testid="collapsedControl"] svg {
-        fill: white !important;
-        color: white !important;
+        display: none !important;
     }
 
     html, body, [class*="css"],
