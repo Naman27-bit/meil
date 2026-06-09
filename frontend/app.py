@@ -22,56 +22,87 @@ st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;500;600;700&display=swap');
 
+    /* Hide broken material icons text */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"],
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
+        display: none !important;
+    }
+
+    /* Fix keyboard_double arrow icon in input */
+    [data-testid="stChatInputSubmitButton"] svg {
+        display: block !important;
+    }
+
     html, body, [class*="css"],
     p, span, div, label, input, textarea, button,
-    .stMarkdown, .stText, .stCaption,
-    [data-testid="stChatMessageContent"],
-    [data-testid="stChatMessageContent"] * {
+    .stMarkdown, .stText {
         font-family: 'Nunito', sans-serif !important;
-        color: #1a1a2e;
     }
 
     .stApp {
         background: linear-gradient(135deg, #fef9f0 0%, #fff4e6 50%, #fef0f5 100%);
     }
 
+    /* Sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #f0f4ff 0%, #e8f0fe 100%);
-        border-right: 2px solid #c7d7f5;
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%) !important;
+        border-right: 2px solid #e05a00;
     }
-
     [data-testid="stSidebar"] * {
-        color: #1a1a2e !important;
+        color: #f0f0f0 !important;
         font-family: 'Nunito', sans-serif !important;
     }
+    [data-testid="stSidebar"] h1 {
+        color: #ffffff !important;
+        font-size: 1.6rem !important;
+    }
+    [data-testid="stSidebar"] .stButton button {
+        background: linear-gradient(135deg, #e05a00, #c44b00) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        font-weight: 700 !important;
+        width: 100% !important;
+        padding: 0.5rem !important;
+    }
+    [data-testid="stSidebar"] hr {
+        border-color: #e05a0044 !important;
+    }
 
-    h1, .stTitle, [data-testid="stHeadingWithActionElements"] h1 {
+    /* Title */
+    h1 {
         font-family: 'Playfair Display', serif !important;
         color: #e05a00 !important;
         font-size: 2.4rem !important;
         font-weight: 700 !important;
     }
-
     h2, h3, h4 {
         font-family: 'Nunito', sans-serif !important;
         color: #2c3e7a !important;
         font-weight: 700 !important;
     }
 
+    /* Chat messages */
     [data-testid="stChatMessage"] {
-        background: #ffffff;
-        border: 1px solid #dde8ff;
-        border-radius: 14px;
-        margin: 6px 0;
-        padding: 4px 8px;
+        background: #ffffff !important;
+        border: 1px solid #e8e8f0 !important;
+        border-radius: 16px !important;
+        margin: 8px 0 !important;
+        padding: 10px 16px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    }
+    [data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+        background: linear-gradient(135deg, #fff4e6, #fef0f5) !important;
+        border-color: #f0c080 !important;
     }
 
+    /* Chat input */
     [data-testid="stChatInput"] {
         background: #ffffff !important;
-        border: 2px solid #4a90d9 !important;
-        border-radius: 12px !important;
+        border: 2px solid #e05a00 !important;
+        border-radius: 14px !important;
+        box-shadow: 0 4px 12px rgba(224,90,0,0.15) !important;
     }
-
     [data-testid="stChatInput"] textarea {
         background: #ffffff !important;
         color: #1a1a2e !important;
@@ -79,22 +110,19 @@ st.markdown("""
         font-family: 'Nunito', sans-serif !important;
     }
 
-    .stButton button {
-        background: linear-gradient(135deg, #4a90d9, #2c6fba);
-        color: white !important;
-        border: none;
-        border-radius: 8px;
-        font-family: 'Nunito', sans-serif !important;
-        font-weight: 600 !important;
+    /* Selectbox */
+    [data-testid="stSelectbox"] * {
+        color: #f0f0f0 !important;
     }
 
     footer { visibility: hidden; }
+    #MainMenu { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
+# ── Sidebar ──────────────────────────────────────────────
 with st.sidebar:
-    st.image("https://img.icons8.com/fluency/96/restaurant.png", width=48)
-    st.title("TanuShree")
+    st.markdown("## 🍽️ TanuShree")
     st.markdown("*Your AI-powered restaurant assistant*")
     st.markdown("---")
 
@@ -107,8 +135,7 @@ with st.sidebar:
     MODEL = {
         "llama-3.1-8b-instant (Fast ✅)": "llama-3.1-8b-instant"
     }
-
-    selected_label = st.selectbox("🤖 Selected Model", list(MODEL.keys()), index=0)
+    selected_label = st.selectbox("Selected Model", list(MODEL.keys()), index=0)
     selected_model = MODEL[selected_label]
     st.caption(f"Model ID: `{selected_model}`")
 
@@ -129,6 +156,7 @@ with st.sidebar:
     st.markdown("**Naman Kumar**")
     st.markdown("Built with **Streamlit** + **Groq** + **Llama 3**")
 
+# ── Main Area ─────────────────────────────────────────────
 col1, col2 = st.columns([3, 1])
 with col1:
     st.title("🍕 Tanman Restro Assistant")
@@ -143,21 +171,23 @@ st.markdown(
 )
 st.markdown("---")
 
+# ── Chat ──────────────────────────────────────────────────
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    avatar = "🧑" if message["role"] == "user" else "🍕"
+    with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 user_input = st.chat_input("Ask me about food, menu, hours... 🍕")
 
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar="🧑"):
         st.markdown(user_input)
 
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar="🍕"):
         with st.spinner("Wait! I'm thinking... 🤔"):
             try:
                 response = get_answer(user_input, model_name=selected_model)
